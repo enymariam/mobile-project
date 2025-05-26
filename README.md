@@ -23,7 +23,8 @@ Question to chatGPT:
     Icon(painter = painterResource(R.drawable.refresh),
                    contentDescription = "Refresh")
 }
-I do not want any functionality in the IconButton. I only wish to use the Refresh icon from Material Design.
+
+>I do not want any functionality in the IconButton. I only wish to use the Refresh icon from Material Design.
 
 
 chatGPT guided me to use `imageVector = Icons.Default.Refresh` which worked.
