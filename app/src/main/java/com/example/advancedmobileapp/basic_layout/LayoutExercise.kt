@@ -1,6 +1,5 @@
 package com.example.advancedmobileapp.basic_layout
 
-import android.graphics.drawable.Icon
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,11 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.advancedmobileapp.R
 import com.example.advancedmobileapp.ui.theme.AdvancedMobileAppTheme
 
 
@@ -76,6 +73,10 @@ fun LayoutExercise(modifier: Modifier = Modifier) {
                         contentDescription = "Refresh"
                     )
                 }
+            }
+            Row(modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center) {
+                Text(text = "0", fontSize = 50.sp)
             }
         }
     }
