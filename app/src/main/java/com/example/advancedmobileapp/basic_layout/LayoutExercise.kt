@@ -28,9 +28,10 @@ fun LayoutExercise(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center) {
 
-            Row(modifier = Modifier
+            Text(" ",
+                modifier = Modifier
                 .fillMaxWidth ()
-                .height(50.dp)
+                .height(60.dp)
                 .background(Color.LightGray)
                 .drawBehind {
                     val borderSize = 1.dp.toPx()
@@ -40,11 +41,8 @@ fun LayoutExercise(modifier: Modifier = Modifier) {
                         end = Offset(size.width, size.height),
                         strokeWidth = borderSize
                     )
-                },
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically) {
-
-            }
+                }
+            )
         }
     }
 }
