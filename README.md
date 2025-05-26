@@ -19,11 +19,11 @@ Used chatGPT because I could not figure out how to use the Icon in IconButton.
 I tried `painter = painterResource(R.drawable...` as per [documentation](https://developer.android.com/develop/ui/compose/components/icon-button).
 
 Question to chatGPT: 
-``
-IconButton(onClick = {}) {
+>IconButton(onClick = {}) {
     Icon(painter = painterResource(R.drawable.refresh),
                    contentDescription = "Refresh")
 }
 I do not want any functionality in the IconButton. I only wish to use the Refresh icon from Material Design.
-``
+
+
 chatGPT guided me to use `imageVector = Icons.Default.Refresh` which worked.
