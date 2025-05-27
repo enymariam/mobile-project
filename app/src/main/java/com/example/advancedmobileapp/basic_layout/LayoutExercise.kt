@@ -69,7 +69,7 @@ fun LayoutExercise(modifier: Modifier = Modifier) {
                     onClick = {}
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Refresh,
+                        imageVector = Icons.Default.Refresh, //Used AI here. More info on readme.
                         contentDescription = "Refresh"
                     )
                 }
