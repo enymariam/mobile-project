@@ -1,6 +1,6 @@
 package com.example.advancedmobileapp.models
 
-data class RatingDto(val id: Int, val name: String, val rating: Float, val reviewCount: Int)
+data class RatingDto(val id: Int, val name: String, val rating: Double, val reviewCount: Int)
 
 data class RatingsState(
     val loading: Boolean = false,

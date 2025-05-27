@@ -2,7 +2,9 @@ package com.example.advancedmobileapp.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.advancedmobileapp.models.RatingDto
 import com.example.advancedmobileapp.models.RatingsState
+import com.example.advancedmobileapp.ratingsService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -23,6 +25,10 @@ class RatingsScreenViewModel: ViewModel() {
                     currentState.copy(loading = true, error = null)
                 }
                 // Get data
+                val ratings = ratingsService.getRatings()
+                _ratingsState.update { currentState ->
+                    currentState.copy(ratings = ratings)
+                }
             } catch(e: Exception) {
                 _ratingsState.update { currentState ->
                     currentState.copy(error = e.toString())

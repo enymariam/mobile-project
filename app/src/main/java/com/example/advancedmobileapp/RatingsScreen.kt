@@ -33,7 +33,9 @@ fun RatingsScreenRoot(modifier: Modifier = Modifier) {
 fun RatingsScreen(modifier: Modifier = Modifier, state: RatingsState) {
 Scaffold(topBar = {
     TopAppBar(title = {
-        Text("Ratings")
+        // Add hamburger navi icon on left
+        Text("Restaurants")
+        // Add refresh icon on right
     })
         }) {  paddingValues -> when {
         state.loading -> {
@@ -54,7 +56,7 @@ Scaffold(topBar = {
                     ) {
                         Text(err)
                     }
-                } ?: LazyColumn {
+                } ?: LazyColumn (modifier = Modifier.fillMaxSize().padding(paddingValues)){
                     items(state.ratings, key = {rating ->
                     rating.id
                 }) { rating ->
