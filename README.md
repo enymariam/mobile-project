@@ -14,6 +14,9 @@ Resources I used to resolve encountered issues
 
 1. [Android Studio Project to GitHub](https://www.youtube.com/watch?v=d0uith-LE3o&ab_channel=PracticalCoding)
 2. [Jetpack Composer Bottom Border](https://medium.com/@banmarkovic/jetpack-compose-bottom-border-8f1662c2aa84)
+3. [CLEARTEXT communication not supported...etc](https://stackoverflow.com/questions/41650965/cleartext-communication-not-supported-on-retrofit)
+4. [SocketException: socket failed: EPERM](https://stackoverflow.com/questions/56266801/java-net-socketexception-socket-failed-eperm-operation-not-permitted)
+5. [Retrofit request to local server](https://stackoverflow.com/questions/40077927/simple-retrofit2-request-to-a-localhost-server)
 
 ## Use of AI
 
