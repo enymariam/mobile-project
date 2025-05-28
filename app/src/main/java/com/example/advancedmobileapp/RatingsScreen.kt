@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.advancedmobileapp.models.RatingDto
@@ -28,7 +29,7 @@ import com.example.advancedmobileapp.vm.RatingsScreenViewModel
 
 @Composable
 fun RatingsScreenRoot(modifier: Modifier = Modifier) {
-    val vm = viewModel<RatingsScreenViewModel>()
+    val vm = hiltViewModel<RatingsScreenViewModel>()
     val ratingsState by vm.ratingsState.collectAsStateWithLifecycle()
 
     RatingsScreen(state = ratingsState)

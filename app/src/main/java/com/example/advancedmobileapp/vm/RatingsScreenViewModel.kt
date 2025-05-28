@@ -2,7 +2,7 @@ package com.example.advancedmobileapp.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.advancedmobileapp.models.RatingDto
+import com.example.advancedmobileapp.DataApi
 import com.example.advancedmobileapp.models.RatingsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RatingsScreenViewModel @Inject constructor() : ViewModel() {
+class RatingsScreenViewModel @Inject constructor(private val api: DataApi) : ViewModel() {
     private val _ratingsState = MutableStateFlow(RatingsState())
     val ratingsState = _ratingsState.asStateFlow()
 
@@ -27,7 +27,7 @@ class RatingsScreenViewModel @Inject constructor() : ViewModel() {
                     currentState.copy(loading = true, error = null)
                 }
                 // Get data
-                val ratings = emptyList<RatingDto>()
+                val ratings = api.getRatings()
                 _ratingsState.update { currentState ->
                     currentState.copy(ratings = ratings)
                 }
