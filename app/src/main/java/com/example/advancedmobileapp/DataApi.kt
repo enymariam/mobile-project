@@ -11,9 +11,9 @@ val retrofit = Retrofit.Builder()
         .build()
 
 // GET Ratings
-interface RatingsApi {
+interface DataApi {
     @GET("api/restaurants/ratings")
     suspend fun getRatings(): List<RatingDto>
 }
 
-val ratingsService = retrofit.create(RatingsApi::class.java)
+val ratingsService = retrofit.create(DataApi::class.java)
