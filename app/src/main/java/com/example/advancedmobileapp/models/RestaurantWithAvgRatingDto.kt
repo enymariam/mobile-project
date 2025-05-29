@@ -1,6 +1,6 @@
 package com.example.advancedmobileapp.models
 
-data class RatingDto(
+data class RestaurantWithAvgRatingDto(
     val id: Int,
     val name: String,
     val cuisine: String,
@@ -13,5 +13,5 @@ data class RatingDto(
 data class RatingsState(
     val loading: Boolean = false,
     val error: String? = null,
-    val ratings:List<RatingDto> = emptyList()
+    val ratings:List<RestaurantWithAvgRatingDto> = emptyList()
 )

@@ -21,16 +21,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AdvancedMobileAppTheme {
-                RatingsScreenRoot()
+                RestaurantsWithAvgRatingsRoot()
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun RatingPreview() {
-    AdvancedMobileAppTheme {
-        RatingsScreenRoot()
     }
 }
