@@ -1,5 +1,6 @@
 package com.example.advancedmobileapp
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,16 +44,18 @@ import com.example.advancedmobileapp.models.RestaurantWithAvgRatingsState
 import com.example.advancedmobileapp.vm.RestaurantsWithAvgRatingsViewModel
 
 @Composable
-fun RestaurantsWithAvgRatingsRoot(modifier: Modifier = Modifier) {
+fun RestaurantsWithAvgRatingsRoot(modifier: Modifier = Modifier, onNavigate: (Int) -> Unit) {
     val vm = hiltViewModel<RestaurantsWithAvgRatingsViewModel>()
     val ratingsState by vm.ratingsState.collectAsStateWithLifecycle()
 
-    RestaurantsWithAvgRatingsScreen(state = ratingsState)
+    RestaurantsWithAvgRatingsScreen(state = ratingsState, onNavigate = onNavigate)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RestaurantsWithAvgRatingsScreen(modifier: Modifier = Modifier, state: RestaurantWithAvgRatingsState) {
+fun RestaurantsWithAvgRatingsScreen(modifier: Modifier = Modifier,
+                                    state: RestaurantWithAvgRatingsState,
+                                    onNavigate: (Int) -> Unit) {
 Scaffold(topBar = {
     TopAppBar(title = {
         // Add hamburger navi icon on left
@@ -89,7 +92,9 @@ Scaffold(topBar = {
                     items(state.restaurantsRatings, key = {rating ->
                     rating.id
                 }) { rating ->
-                        RestaurantWithAvgRatingsItem(item = rating)
+                        RestaurantWithAvgRatingsItem(
+                            item = rating,
+                            onNavigate = onNavigate)
 
                 } }
             }
@@ -98,10 +103,16 @@ Scaffold(topBar = {
 }
 
 @Composable
-fun RestaurantWithAvgRatingsItem(modifier: Modifier = Modifier, item: RestaurantWithAvgRatingDto) {
+fun RestaurantWithAvgRatingsItem(modifier: Modifier = Modifier,
+                                 item: RestaurantWithAvgRatingDto,
+                                 onNavigate: (Int) -> Unit) {
     Card(modifier = Modifier
         .fillMaxWidth()
-        .padding(8.dp)) {
+        .padding(8.dp)
+        .clickable{
+            onNavigate(item.id)
+
+    }) {
         Row (modifier = Modifier
             .fillMaxWidth()
             .padding(4.dp)){

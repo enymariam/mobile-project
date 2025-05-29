@@ -52,6 +52,6 @@ class RestaurantsWithAvgRatingsViewModel @Inject constructor(private val api: Da
 @Composable
 private fun RestaurantsWithAvgRatingsPreview() {
     AdvancedMobileAppTheme {
-        RestaurantsWithAvgRatingsRoot()
+        RestaurantsWithAvgRatingsRoot(onNavigate = {})
     }
 }

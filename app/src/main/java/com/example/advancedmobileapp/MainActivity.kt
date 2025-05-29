@@ -11,6 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.advancedmobileapp.ui.theme.AdvancedMobileAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +24,19 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AdvancedMobileAppTheme {
-                RestaurantRoot()
+                val navController = rememberNavController()
+
+                NavHost(navController = navController, startDestination = "RestaurantsWithAvgRatings") {
+
+                    composable("RestaurantsWithAvgRatings"){
+                        RestaurantsWithAvgRatingsRoot(onNavigate = {
+                            navController.navigate("Restaurant")
+                        })
+                    }
+                    composable("Restaurant"){
+                        RestaurantRoot()
+                    }
+                }
             }
         }
     }
