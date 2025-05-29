@@ -1,5 +1,6 @@
 package com.example.advancedmobileapp
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -120,10 +121,16 @@ fun RestaurantWithAvgRatingsItem(modifier: Modifier = Modifier, item: Restaurant
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis)
                 RatingRow(rating = item.rating ?: 0f, reviewCount = item.reviewCount)
-                Text(item.cuisine)
-                Text(item.priceRange)
-                Text(item.address)
-                Text(item.openStatus)
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Text(item.cuisine, fontWeight = FontWeight.Bold)
+                    Text(item.priceRange)
+                }
+                Text(item.address, color = Color.Gray)
+                Text(item.openStatus,
+                    fontWeight = FontWeight.Bold,
+
+                    color = Color(0xA85c8a21))
             }
         }
     }
