@@ -3,21 +3,24 @@ package com.example.advancedmobileapp
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -26,6 +29,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -81,7 +88,7 @@ Scaffold(topBar = {
                     items(state.restaurantsRatings, key = {rating ->
                     rating.id
                 }) { rating ->
-                        RestaurantWithAvgRatingsItem(rating = rating)
+                        RestaurantWithAvgRatingsItem(item = rating)
 
                 } }
             }
@@ -90,13 +97,13 @@ Scaffold(topBar = {
 }
 
 @Composable
-fun RestaurantWithAvgRatingsItem(modifier: Modifier = Modifier, rating: RestaurantWithAvgRatingDto) {
+fun RestaurantWithAvgRatingsItem(modifier: Modifier = Modifier, item: RestaurantWithAvgRatingDto) {
     Card(modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)) {
+        .fillMaxWidth()
+        .padding(8.dp)) {
         Row (modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp)){
+            .fillMaxWidth()
+            .padding(4.dp)){
             AsyncImage(model = R.drawable.review,
                 contentDescription = "Placeholder Image",
                 modifier = Modifier
@@ -104,14 +111,45 @@ fun RestaurantWithAvgRatingsItem(modifier: Modifier = Modifier, rating: Restaura
                     .padding(4.dp)
                     .clip(RoundedCornerShape(8.dp))
             )
-            Column() {
-                Text(rating.name)
-                // Stars - Rating - (reviewCount)
-                Text(rating.cuisine)
-                Text(rating.priceRange)
-                Text(rating.address)
-                Text(rating.openStatus)
+            Column(modifier = Modifier
+                .weight(1f)
+                .padding(12.dp, 2.dp)) {
+                Text(item.name,
+                    style=MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis)
+                RatingRow(rating = item.rating ?: 0f, reviewCount = item.reviewCount)
+                Text(item.cuisine)
+                Text(item.priceRange)
+                Text(item.address)
+                Text(item.openStatus)
             }
         }
+    }
+}
+
+@Composable
+fun RatingRow(modifier: Modifier = Modifier, rating: Float, reviewCount: Int) {
+    val fullStars = rating.toInt()
+    val hasHalfStar = rating - fullStars >= 0.5
+    val emptyStars = 5 - fullStars - if(hasHalfStar) 1 else 0
+
+    Row(){
+        repeat(fullStars) {
+            Icon(Icons.Filled.Star, contentDescription = "Full star", tint = Color(0xA8A83262))
+        }
+        if(hasHalfStar){
+            Icon(painterResource(id = R.drawable.starhalf), contentDescription = "Half star")
+        }
+        repeat(emptyStars) {
+            Icon(Icons.Filled.Star, contentDescription = "No stars", tint = Color(0xA8d6c3cb))
+        }
+
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(rating.toString())
+        Spacer(modifier = Modifier.width(8.dp))
+        Text("(${reviewCount})")
+
     }
 }
