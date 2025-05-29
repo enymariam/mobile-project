@@ -33,7 +33,7 @@ class RestaurantsWithAvgRatingsViewModel @Inject constructor(private val api: Da
                 // Get data
                 val ratings = api.getRestaurantsWithAvgRatings()
                 _ratingsState.update { currentState ->
-                    currentState.copy(ratings = ratings)
+                    currentState.copy(restaurantsRatings = ratings)
                 }
             } catch(e: Exception) {
                 _ratingsState.update { currentState ->

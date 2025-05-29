@@ -64,7 +64,7 @@ Scaffold(topBar = {
                     .fillMaxSize()
                     .padding(paddingValues),
                     horizontalAlignment = Alignment.CenterHorizontally){
-                    items(state.ratings, key = {rating ->
+                    items(state.restaurantsRatings, key = {rating ->
                     rating.id
                 }) { rating ->
                         RestaurantWithAvgRatingsItem(rating = rating)
