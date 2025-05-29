@@ -1,14 +1,17 @@
 package com.example.advancedmobileapp.models
 
+import com.google.gson.annotations.SerializedName
+
 data class RestaurantWithAvgRatingDto(
     val id: Int,
     val name: String,
     val cuisine: String,
-    val price_range: String,
+    @SerializedName("price_range") val priceRange: String,
     val address: String,
-    val open_status: String,
+    @SerializedName("open_status") val openStatus: String,
     val rating: Float?,
-    val review_count: Int)
+    @SerializedName("review_count") val reviewCount: Int
+)
 
 data class RatingsState(
     val loading: Boolean = false,

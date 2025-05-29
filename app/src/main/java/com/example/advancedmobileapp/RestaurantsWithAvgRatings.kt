@@ -84,9 +84,9 @@ fun RestaurantWithAvgRatingsItem(modifier: Modifier = Modifier, rating: Restaura
                 Text(rating.name)
                 // Stars - Rating - (reviewCount)
                 Text(rating.cuisine)
-                Text(rating.price_range)
+                Text(rating.priceRange)
                 Text(rating.address)
-                Text(rating.open_status)
+                Text(rating.openStatus)
             }
         }
     }
