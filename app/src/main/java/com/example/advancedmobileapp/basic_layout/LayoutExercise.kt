@@ -46,7 +46,7 @@ fun LayoutExercise(modifier: Modifier = Modifier) {
                         color = Color.Black,
                         start = Offset(0f, size.height),
                         end = Offset(size.width, size.height),
-                        strokeWidth = borderSize
+                        strokeWidth = borderSize // List of Sources [2]
                     )
                 }
             )
@@ -69,7 +69,7 @@ fun LayoutExercise(modifier: Modifier = Modifier) {
                     onClick = {}
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Refresh, //Used AI here. More info on readme.
+                        imageVector = Icons.Default.Refresh, // Use of AI [1]
                         contentDescription = "Refresh"
                     )
                 }
