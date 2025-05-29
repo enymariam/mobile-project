@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -22,8 +23,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil.compose.AsyncImage
 import com.example.advancedmobileapp.models.RestaurantWithAvgRatingDto
 import com.example.advancedmobileapp.models.RestaurantWithAvgRatingsState
 import com.example.advancedmobileapp.vm.RestaurantsWithAvgRatingsViewModel
@@ -86,9 +89,11 @@ Scaffold(topBar = {
 @Composable
 fun RestaurantWithAvgRatingsItem(modifier: Modifier = Modifier, rating: RestaurantWithAvgRatingDto) {
     Card(modifier = Modifier.fillMaxWidth()) {
-        Row {
+        Row (modifier = Modifier.fillMaxWidth()){
+            AsyncImage(model = R.drawable.review,
+                contentDescription = "Placeholder Image",
+                modifier = Modifier.size(100.dp))
             Column() {
-                // Image
                 Text(rating.name)
                 // Stars - Rating - (reviewCount)
                 Text(rating.cuisine)
