@@ -41,7 +41,6 @@ import com.example.advancedmobileapp.models.RestaurantState
 import com.example.advancedmobileapp.ui.theme.AdvancedMobileAppTheme
 import com.example.advancedmobileapp.vm.RestaurantViewModel
 
-
 @Composable
 fun RestaurantRoot(
     modifier: Modifier = Modifier,

@@ -1,13 +1,9 @@
 package com.example.advancedmobileapp.vm
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.advancedmobileapp.DataApi
-import com.example.advancedmobileapp.RestaurantsWithAvgRatingsRoot
 import com.example.advancedmobileapp.models.RestaurantWithAvgRatingsState
-import com.example.advancedmobileapp.ui.theme.AdvancedMobileAppTheme
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
