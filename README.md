@@ -12,7 +12,8 @@ This project is for the 2025 course "Advanced Mobile Programming" (R504TL197-300
   - Navigation between views works: Click card -> Click back.
   
 - Exercise 5 is implemented in exercises 2-4. 
-  - In Exercise 4, the view is still missing the card the the restaurant whose ratings we are viewing
+  - In Exercise 4, the view is still missing the card of the restaurant whose ratings we are viewing
+  - It is only displaying reviews defined by a hardcoded restaurant id
   
 - Dagger Hilt is used...
 - Other relevant files: [AppModule.kt](https://github.com/enymariam/mobile-project/blob/7950f2ed3f362487b52c55574c435bf682140a8f/app/src/main/java/com/example/advancedmobileapp/AppModule.kt), [DataApi.kt](https://github.com/enymariam/mobile-project/blob/7950f2ed3f362487b52c55574c435bf682140a8f/app/src/main/java/com/example/advancedmobileapp/DataApi.kt), [TestApp.kt](https://github.com/enymariam/mobile-project/blob/7950f2ed3f362487b52c55574c435bf682140a8f/app/src/main/java/com/example/advancedmobileapp/TestApp.kt)
