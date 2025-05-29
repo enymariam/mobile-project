@@ -10,7 +10,7 @@ This project is for the 2025 course "Advanced Mobile Programming" (R504TL197-300
 - Exercise 4: 
 - Exercise 5 is implemented in exercises 2-4. 
 - Dagger Hilt is used...
-- Other relevant files: [AppModule.kt](), [DataApi.kt](), [TestApp.kt](),
+- Other relevant files: [AppModule.kt](https://github.com/enymariam/mobile-project/blob/7950f2ed3f362487b52c55574c435bf682140a8f/app/src/main/java/com/example/advancedmobileapp/AppModule.kt), [DataApi.kt](https://github.com/enymariam/mobile-project/blob/7950f2ed3f362487b52c55574c435bf682140a8f/app/src/main/java/com/example/advancedmobileapp/DataApi.kt), [TestApp.kt](https://github.com/enymariam/mobile-project/blob/7950f2ed3f362487b52c55574c435bf682140a8f/app/src/main/java/com/example/advancedmobileapp/TestApp.kt)
 
 ### Tests
 Tests have been implemented in the following features...
@@ -32,7 +32,7 @@ I've tried to reference the use of AI as clearly as possible. In code I've comme
 
 ### 1 
 
-Used in (Exercise 1)[https://github.com/enymariam/mobile-project/blob/b3a19e49e07c2898222c308291b2d6689799f9e7/app/src/main/java/com/example/advancedmobileapp/basic_layout/LayoutExercise.kt]
+Used in [Exercise 1](https://github.com/enymariam/mobile-project/blob/b3a19e49e07c2898222c308291b2d6689799f9e7/app/src/main/java/com/example/advancedmobileapp/basic_layout/LayoutExercise.kt)
 
 Used chatGPT because I could not figure out how to use the Icon in IconButton.
 I tried `painter = painterResource(R.drawable...` as per [documentation](https://developer.android.com/develop/ui/compose/components/icon-button).
