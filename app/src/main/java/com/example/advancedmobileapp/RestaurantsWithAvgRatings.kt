@@ -156,7 +156,7 @@ fun RatingRow(modifier: Modifier = Modifier, rating: Float, reviewCount: Int) {
         Spacer(modifier = Modifier.width(8.dp))
         Text(rating.toString())
         Spacer(modifier = Modifier.width(8.dp))
-        Text("(${reviewCount})")
+        Text("($reviewCount)")
 
     }
 }
