@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -88,11 +89,14 @@ Scaffold(topBar = {
 
 @Composable
 fun RestaurantWithAvgRatingsItem(modifier: Modifier = Modifier, rating: RestaurantWithAvgRatingDto) {
-    Card(modifier = Modifier.fillMaxWidth()) {
-        Row (modifier = Modifier.fillMaxWidth()){
+    Card(modifier = Modifier.fillMaxWidth()
+        .padding(8.dp)) {
+        Row (modifier = Modifier.fillMaxWidth()
+            .padding(4.dp)){
             AsyncImage(model = R.drawable.review,
                 contentDescription = "Placeholder Image",
-                modifier = Modifier.size(100.dp))
+                modifier = Modifier.size(150.dp)
+                .padding(4.dp))
             Column() {
                 Text(rating.name)
                 // Stars - Rating - (reviewCount)
