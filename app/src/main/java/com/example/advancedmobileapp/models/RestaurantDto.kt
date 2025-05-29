@@ -2,7 +2,7 @@ package com.example.advancedmobileapp.models
 
 import com.google.gson.annotations.SerializedName
 
-class RestaurantRatingsDto(
+data class RestaurantDto(
     val id: Int,
     @SerializedName("user_id") val userId: Int?,
     val value: Number?,
@@ -10,8 +10,8 @@ class RestaurantRatingsDto(
     @SerializedName("date_rated") val dateRated: String,
 )
 
-data class RestaurantRatingsState(
+data class RestaurantState(
     val loading: Boolean = false,
     val error: String? = null,
-    val restaurantRatings:List<RestaurantRatingsDto> = emptyList()
+    val theRestaurant:List<RestaurantDto> = emptyList()
 )

@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -38,23 +37,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.advancedmobileapp.models.RestaurantRatingsDto
-import com.example.advancedmobileapp.models.RestaurantRatingsState
+import com.example.advancedmobileapp.models.RestaurantDto
+import com.example.advancedmobileapp.models.RestaurantState
 import com.example.advancedmobileapp.ui.theme.AdvancedMobileAppTheme
-import com.example.advancedmobileapp.vm.RestaurantRatingsViewModel
+import com.example.advancedmobileapp.vm.RestaurantViewModel
 
 
 @Composable
-fun RestaurantRatingsRoot(modifier: Modifier = Modifier) {
-    val vm = hiltViewModel<RestaurantRatingsViewModel>()
+fun RestaurantRoot(modifier: Modifier = Modifier) {
+    val vm = hiltViewModel<RestaurantViewModel>()
     val restaurantState by vm.restaurantState.collectAsStateWithLifecycle()
 
-    RestaurantRatingsScreen(state = restaurantState)
+    RestaurantScreen(state = restaurantState)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RestaurantRatingsScreen(modifier: Modifier = Modifier, state: RestaurantRatingsState) {
+fun RestaurantScreen(modifier: Modifier = Modifier, state: RestaurantState) {
     Scaffold(topBar = {
         TopAppBar(title = {
             Text("Restaurant Ratings") // Restaurant title here
@@ -86,11 +85,10 @@ fun RestaurantRatingsScreen(modifier: Modifier = Modifier, state: RestaurantRati
                 .fillMaxSize()
                 .padding(paddingValues),
                 horizontalAlignment = Alignment.CenterHorizontally){
-
-                items(state.restaurantRatings, key = {restaurant ->
-                    restaurant.id
-                }) { restaurantRating ->
-                    RestaurantRatingsItem(item = restaurantRating)
+                items(state.theRestaurant,
+                    key = {restaurant -> restaurant.id }
+                ) { restaurant ->
+                    RestaurantItem(item = restaurant)
 
                 }
             }
@@ -100,7 +98,7 @@ fun RestaurantRatingsScreen(modifier: Modifier = Modifier, state: RestaurantRati
 }
 
 @Composable
-fun RestaurantRatingsItem(modifier: Modifier = Modifier, item: RestaurantRatingsDto) {
+fun RestaurantItem(modifier: Modifier = Modifier, item: RestaurantDto) {
     Card(modifier = Modifier
         .fillMaxWidth()
         .padding(8.dp),
@@ -152,19 +150,19 @@ fun ReviewRow(modifier: Modifier = Modifier, rating: Float) {
 
 @Preview(showBackground = true)
 @Composable
-fun RestaurantRatingsScreenPreview() {
+fun RestaurantScreenPreview() {
     AdvancedMobileAppTheme {
         val state =
-            RestaurantRatingsState(
-        restaurantRatings = listOf(
-            RestaurantRatingsDto(
+            RestaurantState(
+        theRestaurant = listOf(
+            RestaurantDto(
                 id = 1,
                 userId = 1,
                 value = 4,
                 description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                 dateRated = "2025-03-26 05:58:05",
             ),
-            RestaurantRatingsDto(
+            RestaurantDto(
                 id = 2,
                 userId = 2,
                 value = 3.5,
@@ -172,6 +170,6 @@ fun RestaurantRatingsScreenPreview() {
                 dateRated = "2024-07-13 07:43:11",
             ))
         )
-        RestaurantRatingsScreen(state = state)
+        RestaurantScreen(state = state)
     }
 }

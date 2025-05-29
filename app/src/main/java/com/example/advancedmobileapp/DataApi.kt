@@ -1,6 +1,6 @@
 package com.example.advancedmobileapp
 
-import com.example.advancedmobileapp.models.RestaurantRatingsDto
+import com.example.advancedmobileapp.models.RestaurantDto
 import com.example.advancedmobileapp.models.RestaurantWithAvgRatingDto
 import retrofit2.http.GET
 
@@ -12,5 +12,5 @@ interface DataApi {
 
     // Ratings on individual restaurant
     @GET("api/restaurants/{id}ratings")
-    suspend fun getRestaurantRatings(): List<RestaurantRatingsDto>
+    suspend fun getRestaurant(): List<RestaurantDto>
 }
