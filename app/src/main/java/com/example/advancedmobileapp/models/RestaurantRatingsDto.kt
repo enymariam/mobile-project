@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 class RestaurantRatingsDto(
     val id: Int,
     @SerializedName("user_id") val userId: Int?,
-    @SerializedName("value") val stars: Int,
+    val value: Number?,
     val description: String?,
     @SerializedName("date_rated") val dateRated: String,
 )

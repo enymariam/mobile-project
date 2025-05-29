@@ -1,20 +1,28 @@
 package com.example.advancedmobileapp
 
-import androidx.compose.foundation.gestures.snapping.SnapPosition
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -22,13 +30,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.advancedmobileapp.models.RestaurantRatingsDto
 import com.example.advancedmobileapp.models.RestaurantRatingsState
-import com.example.advancedmobileapp.models.RestaurantWithAvgRatingDto
 import com.example.advancedmobileapp.ui.theme.AdvancedMobileAppTheme
 import com.example.advancedmobileapp.vm.RestaurantRatingsViewModel
 
@@ -46,9 +56,7 @@ fun RestaurantRatingsRoot(modifier: Modifier = Modifier) {
 fun RestaurantRatingsScreen(modifier: Modifier = Modifier, state: RestaurantRatingsState) {
     Scaffold(topBar = {
         TopAppBar(title = {
-            // Add hamburger navi icon on left
-            Text("Restaurant Ratings")
-            // Add refresh icon on right
+            Text("Restaurant Ratings") // Restaurant title here
         }, navigationIcon = {
             IconButton(onClick = {}) {
                 Icon(Icons.Default.Menu, contentDescription = "Open menu")
@@ -73,6 +81,17 @@ fun RestaurantRatingsScreen(modifier: Modifier = Modifier, state: RestaurantRati
                 ) {
                     Text(err)
                 }
+            } ?: LazyColumn (modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
+                horizontalAlignment = Alignment.CenterHorizontally){
+
+                items(state.restaurantRatings, key = {restaurant ->
+                    restaurant.id
+                }) { restaurantRating ->
+                    RestaurantRatingsItem(item = restaurantRating)
+
+                }
             }
         }
     }
@@ -80,13 +99,53 @@ fun RestaurantRatingsScreen(modifier: Modifier = Modifier, state: RestaurantRati
 }
 
 @Composable
-fun RestaurantRatingsItem(modifier: Modifier = Modifier, restaurant: RestaurantRatingsDto) {
-    Card(modifier = Modifier.fillMaxWidth()) {
-        Row {
-            Column() {
-restaurant.id
+fun RestaurantRatingsItem(modifier: Modifier = Modifier, item: RestaurantRatingsDto) {
+    Card(modifier = Modifier
+        .fillMaxWidth()
+        .padding(8.dp),
+        elevation = CardDefaults.cardElevation(4.dp)) {
+        Row (modifier = Modifier
+            .fillMaxWidth()
+            .padding(4.dp)){
+
+            Column(modifier = Modifier.padding(12.dp, 2.dp)) {
+                ReviewRow(rating = item.value?.toFloat() ?: 0f)
+                Text(item.description ?: "")
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(item.dateRated,
+                    color = Color.Gray,
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.bodySmall)
             }
         }
+    }
+}
+
+@Composable
+fun ReviewRow(modifier: Modifier = Modifier, rating: Float) {
+    val fullStars = rating.toInt()
+    val hasHalfStar = rating - fullStars >= 0.5
+    val emptyStars = 5 - fullStars - if(hasHalfStar) 1 else 0
+
+    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)){
+        Row(modifier = Modifier.weight(2f)) {
+            repeat(fullStars) {
+                Icon(Icons.Filled.Star, contentDescription = "Full star", tint = Color(0xA8A83262))
+            }
+            if (hasHalfStar) {
+                Icon(painterResource(id = R.drawable.starhalf), contentDescription = "Half star")
+            }
+            repeat(emptyStars) {
+                Icon(Icons.Filled.Star, contentDescription = "No stars", tint = Color(0xA8d6c3cb))
+            }
+
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(rating.toString())
+        }
+        Row() {
+            Icon(Icons.Filled.Delete, contentDescription = "Delete", tint = Color(0xA8A83262))
+        }
+
     }
 }
 
@@ -100,19 +159,18 @@ fun RestaurantRatingsScreenPreview() {
             RestaurantRatingsDto(
                 id = 1,
                 userId = 1,
-                stars = 4,
+                value = 4,
                 description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                 dateRated = "2025-03-26 05:58:05",
             ),
             RestaurantRatingsDto(
                 id = 2,
                 userId = 2,
-                stars = 3,
+                value = 3.5,
                 description = "Ihan jees",
                 dateRated = "2024-07-13 07:43:11",
             ))
         )
         RestaurantRatingsScreen(state = state)
     }
-
 }
