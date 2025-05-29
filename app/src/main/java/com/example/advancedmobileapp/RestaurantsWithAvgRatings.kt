@@ -36,7 +36,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.example.advancedmobileapp.models.RestaurantWithAvgRatingDto
@@ -44,9 +43,11 @@ import com.example.advancedmobileapp.models.RestaurantWithAvgRatingsState
 import com.example.advancedmobileapp.vm.RestaurantsWithAvgRatingsViewModel
 
 @Composable
-fun RestaurantsWithAvgRatingsRoot(modifier: Modifier = Modifier, onNavigate: (Int) -> Unit) {
-    val vm = hiltViewModel<RestaurantsWithAvgRatingsViewModel>()
-    val ratingsState by vm.ratingsState.collectAsStateWithLifecycle()
+fun RestaurantsWithAvgRatingsRoot(modifier: Modifier = Modifier,
+                                  onNavigate: (Int) -> Unit,
+                                  viewmodel:RestaurantsWithAvgRatingsViewModel) {
+
+    val ratingsState by viewmodel.ratingsState.collectAsStateWithLifecycle()
 
     RestaurantsWithAvgRatingsScreen(state = ratingsState, onNavigate = onNavigate)
 }

@@ -47,11 +47,3 @@ class RestaurantsWithAvgRatingsViewModel @Inject constructor(private val api: Da
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-private fun RestaurantsWithAvgRatingsPreview() {
-    AdvancedMobileAppTheme {
-        RestaurantsWithAvgRatingsRoot(onNavigate = {})
-    }
-}

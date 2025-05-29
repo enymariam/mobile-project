@@ -15,7 +15,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -36,7 +35,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.advancedmobileapp.models.RestaurantDto
 import com.example.advancedmobileapp.models.RestaurantState
@@ -45,21 +43,31 @@ import com.example.advancedmobileapp.vm.RestaurantViewModel
 
 
 @Composable
-fun RestaurantRoot(modifier: Modifier = Modifier,onNavigate: () -> Unit) {
-    val vm = hiltViewModel<RestaurantViewModel>()
-    val restaurantState by vm.restaurantState.collectAsStateWithLifecycle()
-
-    RestaurantScreen(state = restaurantState, onNavigate = onNavigate)
+fun RestaurantRoot(
+    modifier: Modifier = Modifier,
+    viewModel: RestaurantViewModel,
+    onNavigateBack: () -> Unit
+    ) {
+    val restaurantState by viewModel.restaurantState.collectAsStateWithLifecycle()
+    RestaurantScreen(
+        state = restaurantState,
+        onNavigateBack = {
+            viewModel.getRestaurant()
+            onNavigateBack()
+        })
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RestaurantScreen(modifier: Modifier = Modifier, state: RestaurantState, onNavigate: () -> Unit) {
+fun RestaurantScreen(modifier: Modifier = Modifier,
+                     state: RestaurantState,
+                     onNavigateBack: () -> Unit
+) {
     Scaffold(topBar = {
         TopAppBar(title = {
             Text("Restaurant Ratings") // Restaurant title here
         }, navigationIcon = {
-            IconButton(onClick = onNavigate) {
+            IconButton(onClick = onNavigateBack) {
                 Icon(Icons.AutoMirrored.Default.ArrowBack, contentDescription = "Back")
             }
         }
@@ -172,6 +180,6 @@ fun RestaurantScreenPreview() {
                 dateRated = "2024-07-13 07:43:11",
             ))
         )
-        RestaurantScreen(state = state, onNavigate = {})
+        RestaurantScreen(state = state, onNavigateBack = {})
     }
 }

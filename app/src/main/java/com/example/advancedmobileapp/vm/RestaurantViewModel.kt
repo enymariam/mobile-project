@@ -20,7 +20,7 @@ class RestaurantViewModel @Inject constructor(private val api: DataApi) : ViewMo
         getRestaurant()
     }
 
-    private fun getRestaurant() {
+    fun getRestaurant() {
         viewModelScope.launch{
             try {
                 _restaurantState.update { currentState ->
