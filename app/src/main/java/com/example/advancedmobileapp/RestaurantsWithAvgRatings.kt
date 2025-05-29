@@ -147,7 +147,7 @@ fun RatingRow(modifier: Modifier = Modifier, rating: Float, reviewCount: Int) {
             Icon(Icons.Filled.Star, contentDescription = "Full star", tint = Color(0xA8A83262))
         }
         if(hasHalfStar){
-            Icon(painterResource(id = R.drawable.starhalf), contentDescription = "Half star")
+            Icon(painterResource(id = R.drawable.star_half), contentDescription = "Half star")
         }
         repeat(emptyStars) {
             Icon(Icons.Filled.Star, contentDescription = "No stars", tint = Color(0xA8d6c3cb))

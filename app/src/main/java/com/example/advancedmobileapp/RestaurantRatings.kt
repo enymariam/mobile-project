@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -133,7 +134,7 @@ fun ReviewRow(modifier: Modifier = Modifier, rating: Float) {
                 Icon(Icons.Filled.Star, contentDescription = "Full star", tint = Color(0xA8A83262))
             }
             if (hasHalfStar) {
-                Icon(painterResource(id = R.drawable.starhalf), contentDescription = "Half star")
+                Icon(painterResource(id = R.drawable.star_half), contentDescription = "Half star",tint = Color(0xA8A83262))
             }
             repeat(emptyStars) {
                 Icon(Icons.Filled.Star, contentDescription = "No stars", tint = Color(0xA8d6c3cb))
