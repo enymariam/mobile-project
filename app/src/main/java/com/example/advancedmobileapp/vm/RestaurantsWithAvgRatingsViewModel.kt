@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.advancedmobileapp.DataApi
 import com.example.advancedmobileapp.RestaurantsWithAvgRatingsRoot
-import com.example.advancedmobileapp.models.RatingsState
+import com.example.advancedmobileapp.models.RestaurantWithAvgRatingsState
 import com.example.advancedmobileapp.ui.theme.AdvancedMobileAppTheme
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RestaurantsWithAvgRatingsViewModel @Inject constructor(private val api: DataApi) : ViewModel() {
-    private val _ratingsState = MutableStateFlow(RatingsState())
+    private val _ratingsState = MutableStateFlow(RestaurantWithAvgRatingsState())
     val ratingsState = _ratingsState.asStateFlow()
 
     init {

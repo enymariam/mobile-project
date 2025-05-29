@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.advancedmobileapp.models.RestaurantWithAvgRatingDto
-import com.example.advancedmobileapp.models.RatingsState
+import com.example.advancedmobileapp.models.RestaurantWithAvgRatingsState
 import com.example.advancedmobileapp.vm.RestaurantsWithAvgRatingsViewModel
 
 @Composable
@@ -34,7 +34,7 @@ fun RestaurantsWithAvgRatingsRoot(modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RestaurantsWithAvgRatingsScreen(modifier: Modifier = Modifier, state: RatingsState) {
+fun RestaurantsWithAvgRatingsScreen(modifier: Modifier = Modifier, state: RestaurantWithAvgRatingsState) {
 Scaffold(topBar = {
     TopAppBar(title = {
         // Add hamburger navi icon on left

@@ -13,7 +13,7 @@ data class RestaurantWithAvgRatingDto(
     @SerializedName("review_count") val reviewCount: Int
 )
 
-data class RatingsState(
+data class RestaurantWithAvgRatingsState(
     val loading: Boolean = false,
     val error: String? = null,
     val ratings:List<RestaurantWithAvgRatingDto> = emptyList()
