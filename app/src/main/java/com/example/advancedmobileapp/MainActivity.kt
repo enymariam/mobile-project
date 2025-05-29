@@ -34,7 +34,9 @@ class MainActivity : ComponentActivity() {
                         })
                     }
                     composable("Restaurant"){
-                        RestaurantRoot()
+                        RestaurantRoot(onNavigate = {
+                            navController.navigateUp()
+                        })
                     }
                 }
             }

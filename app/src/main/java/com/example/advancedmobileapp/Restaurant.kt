@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Star
@@ -44,24 +45,25 @@ import com.example.advancedmobileapp.vm.RestaurantViewModel
 
 
 @Composable
-fun RestaurantRoot(modifier: Modifier = Modifier) {
+fun RestaurantRoot(modifier: Modifier = Modifier,onNavigate: () -> Unit) {
     val vm = hiltViewModel<RestaurantViewModel>()
     val restaurantState by vm.restaurantState.collectAsStateWithLifecycle()
 
-    RestaurantScreen(state = restaurantState)
+    RestaurantScreen(state = restaurantState, onNavigate = onNavigate)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RestaurantScreen(modifier: Modifier = Modifier, state: RestaurantState) {
+fun RestaurantScreen(modifier: Modifier = Modifier, state: RestaurantState, onNavigate: () -> Unit) {
     Scaffold(topBar = {
         TopAppBar(title = {
             Text("Restaurant Ratings") // Restaurant title here
         }, navigationIcon = {
-            IconButton(onClick = {}) {
-                Icon(Icons.Default.Menu, contentDescription = "Open menu")
+            IconButton(onClick = onNavigate) {
+                Icon(Icons.AutoMirrored.Default.ArrowBack, contentDescription = "Back")
             }
-        })
+        }
+        )
     }) {  paddingValues -> when {
         state.loading -> {
             Box(
@@ -170,6 +172,6 @@ fun RestaurantScreenPreview() {
                 dateRated = "2024-07-13 07:43:11",
             ))
         )
-        RestaurantScreen(state = state)
+        RestaurantScreen(state = state, onNavigate = {})
     }
 }
