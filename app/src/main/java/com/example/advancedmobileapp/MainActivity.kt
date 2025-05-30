@@ -12,8 +12,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Bookmarks
-import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.DrawerValue
@@ -40,7 +38,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import androidx.navigation.compose.rememberNavController
 import com.example.advancedmobileapp.ui.theme.AdvancedMobileAppTheme
-import com.example.advancedmobileapp.vm.RestaurantViewModel
 import com.example.advancedmobileapp.vm.RestaurantsWithAvgRatingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -61,6 +58,9 @@ class MainActivity : ComponentActivity() {
                     DrawerItem(Icons.Default.Home, "Home"),
                     DrawerItem(Icons.Default.Star, "Rated Restaurants"),
                     DrawerItem(Icons.Default.AccountCircle, "Login")
+                    /** TODO
+                     * Navigation items do nothing atm.
+                     */
                 )
 
                 val selectedItem = remember { mutableStateOf(items[0]) }
@@ -100,9 +100,10 @@ class MainActivity : ComponentActivity() {
                                         navController.navigate("Restaurant")
                                     })
                             }
+
                             composable("Restaurant") { navGraph ->
                                 val viewmodel =
-                                    navGraph.SharedViewModel<RestaurantViewModel>(navController)
+                                    navGraph.SharedViewModel<RestaurantsWithAvgRatingsViewModel>(navController)
                                 RestaurantRoot(viewModel = viewmodel, onNavigateBack = {
                                     navController.navigateUp()
                                 })

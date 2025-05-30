@@ -27,24 +27,24 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.advancedmobileapp.models.RestaurantDto
 import com.example.advancedmobileapp.models.RestaurantState
-import com.example.advancedmobileapp.ui.theme.AdvancedMobileAppTheme
-import com.example.advancedmobileapp.vm.RestaurantViewModel
+import com.example.advancedmobileapp.models.RestaurantsDto
+import com.example.advancedmobileapp.vm.RestaurantsWithAvgRatingsViewModel
 
 @Composable
 fun RestaurantRoot(
     modifier: Modifier = Modifier,
-    viewModel: RestaurantViewModel,
+    viewModel: RestaurantsWithAvgRatingsViewModel,
     onNavigateBack: () -> Unit
     ) {
     val restaurantState by viewModel.restaurantState.collectAsStateWithLifecycle()
@@ -54,17 +54,22 @@ fun RestaurantRoot(
             viewModel.getRestaurant()
             onNavigateBack()
         })
+
+    LaunchedEffect(Unit){
+        viewModel.getRestaurant()
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RestaurantScreen(modifier: Modifier = Modifier,
-                     state: RestaurantState,
-                     onNavigateBack: () -> Unit
+fun RestaurantScreen(
+    modifier: Modifier = Modifier,
+    state: RestaurantState,
+    onNavigateBack: () -> Unit
 ) {
     Scaffold(topBar = {
         TopAppBar(title = {
-            Text("Restaurant Ratings") // Restaurant title here
+            Text("Restaurant") // Restaurant title here
         }, navigationIcon = {
             IconButton(onClick = onNavigateBack) {
                 Icon(Icons.AutoMirrored.Default.ArrowBack, contentDescription = "Back")
@@ -93,9 +98,10 @@ fun RestaurantScreen(modifier: Modifier = Modifier,
             } ?: LazyColumn (modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues),
-                horizontalAlignment = Alignment.CenterHorizontally){
-                items(state.theRestaurant,
-                    key = {restaurant -> restaurant.id }
+                horizontalAlignment = Alignment.CenterHorizontally
+            ){
+                items(state.theRestaurant?.review?: emptyList(),
+                    key = {r -> r.id }
                 ) { restaurant ->
                     RestaurantItem(item = restaurant)
 
@@ -107,7 +113,10 @@ fun RestaurantScreen(modifier: Modifier = Modifier,
 }
 
 @Composable
-fun RestaurantItem(modifier: Modifier = Modifier, item: RestaurantDto) {
+fun RestaurantItem(
+    modifier: Modifier = Modifier,
+    item: RestaurantDto
+) {
     Card(modifier = Modifier
         .fillMaxWidth()
         .padding(8.dp),
@@ -117,7 +126,9 @@ fun RestaurantItem(modifier: Modifier = Modifier, item: RestaurantDto) {
             .padding(4.dp)){
 
             Column(modifier = Modifier.padding(12.dp, 2.dp)) {
+
                 ReviewRow(rating = item.value?.toFloat() ?: 0f)
+
                 Text(item.description ?: "")
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(item.dateRated,
@@ -154,31 +165,5 @@ fun ReviewRow(modifier: Modifier = Modifier, rating: Float) {
             Icon(Icons.Filled.Delete, contentDescription = "Delete", tint = Color(0xA8A83262))
         }
 
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun RestaurantScreenPreview() {
-    AdvancedMobileAppTheme {
-        val state =
-            RestaurantState(
-        theRestaurant = listOf(
-            RestaurantDto(
-                id = 1,
-                userId = 1,
-                value = 4,
-                description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                dateRated = "2025-03-26 05:58:05",
-            ),
-            RestaurantDto(
-                id = 2,
-                userId = 2,
-                value = 3.5,
-                description = "Ihan jees",
-                dateRated = "2024-07-13 07:43:11",
-            ))
-        )
-        RestaurantScreen(state = state, onNavigateBack = {})
     }
 }

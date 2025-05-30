@@ -43,63 +43,68 @@ import com.example.advancedmobileapp.models.RestaurantWithAvgRatingsState
 import com.example.advancedmobileapp.vm.RestaurantsWithAvgRatingsViewModel
 
 @Composable
-fun RestaurantsWithAvgRatingsRoot(modifier: Modifier = Modifier,
-                                  onNavigate: (Int) -> Unit,
-                                  viewmodel:RestaurantsWithAvgRatingsViewModel) {
+fun RestaurantsWithAvgRatingsRoot(
+    modifier: Modifier = Modifier,
+    onNavigate: () -> Unit,
+    viewmodel:RestaurantsWithAvgRatingsViewModel) {
 
     val ratingsState by viewmodel.ratingsState.collectAsStateWithLifecycle()
 
-    RestaurantsWithAvgRatingsScreen(state = ratingsState, onNavigate = onNavigate)
+    RestaurantsWithAvgRatingsScreen(
+        state = ratingsState,
+        onNavigate = {chosenRestaurantId -> viewmodel.setRestaurantId(chosenRestaurantId)
+            onNavigate()
+    })
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RestaurantsWithAvgRatingsScreen(modifier: Modifier = Modifier,
-                                    state: RestaurantWithAvgRatingsState,
-                                    onNavigate: (Int) -> Unit) {
-Scaffold(topBar = {
-    TopAppBar(title = {
-        // Add hamburger navi icon on left
-        Text("Restaurants")
-        // Add refresh icon on right
-    }, navigationIcon = {
-        IconButton(onClick = {}) {
-            Icon(Icons.Default.Menu, contentDescription = "Open menu")
-        }
-    })
-}) {  paddingValues -> when {
-        state.loading -> {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                contentAlignment = Alignment.Center
-        ) {
-                CircularProgressIndicator() }
+fun RestaurantsWithAvgRatingsScreen(
+    modifier: Modifier = Modifier,
+    state: RestaurantWithAvgRatingsState,
+    onNavigate: (Int) -> Unit
+) {
+    Scaffold(topBar = {
+        TopAppBar(title = {
+            Text("Restaurants")
+        }, navigationIcon = {
+            IconButton(onClick = {}) {
+                Icon(Icons.Default.Menu, contentDescription = "Open menu")
             }
-            else -> {
-                state.error?.let { err ->
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(paddingValues), contentAlignment = Alignment.Center
-                    ) {
-                        Text(err)
-                    }
-                } ?: LazyColumn (modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                    horizontalAlignment = Alignment.CenterHorizontally){
-                    items(state.restaurantsRatings, key = {rating ->
-                    rating.id
-                }) { rating ->
-                        RestaurantWithAvgRatingsItem(
-                            item = rating,
-                            onNavigate = onNavigate)
+        })
+    }) {  paddingValues -> when {
+            state.loading -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues),
+                    contentAlignment = Alignment.Center
+            ) {
+                    CircularProgressIndicator() }
+                }
+                else -> {
+                    state.error?.let { err ->
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(paddingValues), contentAlignment = Alignment.Center
+                        ) {
+                            Text(err)
+                        }
+                    } ?: LazyColumn (modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues),
+                        horizontalAlignment = Alignment.CenterHorizontally){
+                        items(state.restaurantsRatings, key = {rating ->
+                        rating.id
+                    }) { rating ->
+                            RestaurantWithAvgRatingsItem(
+                                item = rating,
+                                onNavigate = onNavigate)
 
-                } }
+                    } }
+                }
             }
-        }
     }
 }
 
