@@ -56,6 +56,7 @@ Question to chatGPT:
 `How do I apply custom labels to composable modal navigation drawer?`
 
 chatGPT guided me to create a small data class so that I can add the label as a parameter.
+And then I also found pretty much [the same in the course material](https://juhaniguru-edistynytmobiili-2025.onrender.com/industry/#navigationdrawer).
 
 ### 3
 
