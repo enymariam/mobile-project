@@ -104,9 +104,17 @@ data class RestaurantState(
 
 chatGpt guided me to make changes and with its help, it started to work.
 
-### Summary about AI use
+## Summary
 
 I seem to turn to AI when I'm still coding quite late at night and simply do not have the brainpower to think for myself or follow multistep instructions.
 So an easy way to avoid AI is to just code at reasonable hours.
 
 Also wanted to make a note that I do not copy+paste any AI answers (or code in general) but type it. At least that way I am still learning something.
+
+I work mainly with PHP and got confused a few times when I got a code error (tried to concatenate using PHP syntax..), Kotlin does not come naturally quite yet.
+
+All in all this course was much more pleasant than the basic mobile course that used xml and the design view.
+Coding felt much more natural with it than xml (or using the design view). My overall stance on mobile programming was super negative after the first course but now I'm kind of looking forward to learn more. 
+So Yay!
+
+Please do message me if the functionalities I've done are not enough to pass the course.
