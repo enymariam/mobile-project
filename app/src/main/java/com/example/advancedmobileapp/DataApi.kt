@@ -15,5 +15,5 @@ interface DataApi {
 
     // Ratings on individual restaurant
     @GET("api/restaurants/{id}/ratings")
-    suspend fun getRestaurant(@Path("id") id: Int): List<RestaurantDto>
+    suspend fun getRestaurant(@Path("id") id: Int): List<RestaurantDto>  // Use of AI [3]
 }

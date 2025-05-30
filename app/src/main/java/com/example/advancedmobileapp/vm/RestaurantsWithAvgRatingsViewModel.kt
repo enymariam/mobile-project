@@ -44,7 +44,7 @@ class RestaurantsWithAvgRatingsViewModel @Inject constructor(
                 savedStateHandle.get<Int>("id")?.let{ pId ->
                     val restaurant = api.getRestaurant(pId)
                     _restaurantState.update { currentState ->
-                        currentState.copy(theRestaurant = RestaurantsDto(name = "", review = restaurant))
+                        currentState.copy(theRestaurant = RestaurantsDto(name = "", review = restaurant))  // Use of AI [3]
                     }
                 }
 
