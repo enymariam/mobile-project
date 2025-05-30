@@ -2,14 +2,18 @@
 
 This project is for the 2025 course "Advanced Mobile Programming" (R504TL197-3002).
 
+## Backend
+
+Project is dependent on this backend: [emo2025_backend](https://github.com/juhaniguru/emo2025_backend)
+
 ## List of Exercises
 
 - [Exercise 1](https://github.com/enymariam/mobile-project/blob/b3a19e49e07c2898222c308291b2d6689799f9e7/app/src/main/java/com/example/advancedmobileapp/basic_layout/LayoutExercise.kt) 
 
-Exercises 2, 3, 4 and parts of 5 are implemented in the main app.
+- Exercises 2, 3, 4 and parts of 5 are implemented in the main app.
 
 ### Tests
-Tests have been implemented in the following features...
+Tests are pending
 
 ## List of Sources
 
