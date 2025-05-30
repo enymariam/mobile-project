@@ -5,18 +5,8 @@ This project is for the 2025 course "Advanced Mobile Programming" (R504TL197-300
 ## List of Exercises
 
 - [Exercise 1](https://github.com/enymariam/mobile-project/blob/b3a19e49e07c2898222c308291b2d6689799f9e7/app/src/main/java/com/example/advancedmobileapp/basic_layout/LayoutExercise.kt) 
-- Exercise 2: [Model](https://github.com/enymariam/mobile-project/blob/0b889d0682bcf28475f1850f80a70874e84ef2f7/app/src/main/java/com/example/advancedmobileapp/models/RestaurantWithAvgRatingDto.kt), [viewModel](https://github.com/enymariam/mobile-project/blob/0b889d0682bcf28475f1850f80a70874e84ef2f7/app/src/main/java/com/example/advancedmobileapp/vm/RestaurantsWithAvgRatingsViewModel.kt) & [Root](https://github.com/enymariam/mobile-project/blob/0b889d0682bcf28475f1850f80a70874e84ef2f7/app/src/main/java/com/example/advancedmobileapp/RestaurantsWithAvgRatings.kt)
-- Exercise 3: [Model](https://github.com/enymariam/mobile-project/blob/0b889d0682bcf28475f1850f80a70874e84ef2f7/app/src/main/java/com/example/advancedmobileapp/models/RestaurantDto.kt), [viewModel](https://github.com/enymariam/mobile-project/blob/0b889d0682bcf28475f1850f80a70874e84ef2f7/app/src/main/java/com/example/advancedmobileapp/vm/RestaurantViewModel.kt) & [Root](https://github.com/enymariam/mobile-project/blob/0b889d0682bcf28475f1850f80a70874e84ef2f7/app/src/main/java/com/example/advancedmobileapp/Restaurant.kt)
-- Exercise 4: Mainly in [MainActivity.kt](https://github.com/enymariam/mobile-project/blob/6586684bf70584a332293509f132888cc1c14e50/app/src/main/java/com/example/advancedmobileapp/MainActivity.kt)
-  - The drawable modal is not quite finished yet. It opens by swiping from left to right but the items do nothing.
-  - Navigation between views works: Click card -> Click back.
-  
-- Exercise 5 is implemented in exercises 2-4. 
-  - In Exercise 4, the view is still missing the card of the restaurant whose ratings we are viewing
-  - It is only displaying reviews defined by a hardcoded restaurant id
-  
-- Dagger Hilt is used...
-- Other relevant files: [AppModule.kt](https://github.com/enymariam/mobile-project/blob/7950f2ed3f362487b52c55574c435bf682140a8f/app/src/main/java/com/example/advancedmobileapp/AppModule.kt), [DataApi.kt](https://github.com/enymariam/mobile-project/blob/7950f2ed3f362487b52c55574c435bf682140a8f/app/src/main/java/com/example/advancedmobileapp/DataApi.kt), [TestApp.kt](https://github.com/enymariam/mobile-project/blob/7950f2ed3f362487b52c55574c435bf682140a8f/app/src/main/java/com/example/advancedmobileapp/TestApp.kt)
+
+Exercises 2, 3, 4 and parts of 5 are implemented in the main app.
 
 ### Tests
 Tests have been implemented in the following features...
@@ -56,12 +46,59 @@ Question to chatGPT:
 chatGPT guided me to use `imageVector = Icons.Default.Refresh` which worked. This was later shown on course material also, simply as `Icons(Icons.Default.Refresh...`
 
 ### 2
-Used in the ModalNavigationDrawer to map custom labels to each icon.
+Used in the ModalNavigationDrawer (in [MainActivity.kt](https://github.com/enymariam/mobile-project/blob/6586684bf70584a332293509f132888cc1c14e50/app/src/main/java/com/example/advancedmobileapp/MainActivity.kt)) to map custom labels to each icon.
 
 Question to chatGPT:
 `How do I apply custom labels to composable modal navigation drawer?`
 
-chatGPT guided me to create a small data class so tha I can add the label as a parameter.
+chatGPT guided me to create a small data class so that I can add the label as a parameter.
+
+### 3
+
+I got an error:
+`Expected BEGIN_OBJECT but was BEGIN_ARRAY at line 1 column 2 path $`
+
+Which was caused by:
+```
+data class RestaurantsDto(
+    val name: String,
+    val review: List<RestaurantDto>
+)
+
+data class RestaurantState(
+    val error: String? = null,
+    val loading: Boolean = false,
+    val theRestaurant: RestaurantsDto? = null
+)
+```
+I checked the sample codes multiple times and I believe my implementation was the same. Could not get it to work though.
+
+RestaurantDto is an array from API. RestaurantsDto is an object that includes the array. According to chatGpt, Gson got confused here.
+
+Question to chatGPT:
+```
+I get an arror "Expected BEGIN_OBJECT but was BEGIN_ARRAY at line 1 column 2 path $" and I believe it's coming from here:
+data class RestaurantDto(
+    val id: Int,
+    @SerializedName("user_id") val userId: Int?,
+    val value: Number?,
+    val description: String?,
+    @SerializedName("date_rated") val dateRated: String,
+)
+
+data class RestaurantsDto(
+    val name: String,
+    val review: List<RestaurantDto>
+)
+
+data class RestaurantState(
+    val error: String? = null,
+    val loading: Boolean = false,
+    val theRestaurant: RestaurantsDto? = null
+)
+```
+
+chatGpt guided me to make changes and with its help, it started to work.
 
 ### Summary about AI use
 
